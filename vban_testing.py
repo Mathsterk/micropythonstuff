@@ -7,6 +7,8 @@ import uctypes
 from machine import ADC,Pin
 import machine
 
+led=Pin(2,Pin.OUT)
+
 host='192.168.1.185'
 port = 6980
 SSID="IOT"
@@ -56,6 +58,7 @@ def connectWifi(ssid,passwd):
   while(wlan.ifconfig()[0]=='0.0.0.0'):
     time.sleep(1)
     print("Waiting for IP")
+  led.value(1)
   return True
   
 #Catch exceptions,stop program if interrupted accidentally in the 'try'
@@ -156,4 +159,5 @@ except:
     s.close()
   wlan.disconnect()
   wlan.active(False)
+  led.value(0)
   print("socket DIED")

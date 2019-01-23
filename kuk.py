@@ -23,7 +23,6 @@ state = 0
 c=None
 
 
-status = False
 temp = 0
 prevTemp = 0
 
@@ -85,6 +84,10 @@ while True:
           status = not status
           #c.publish(TOPIC, "{\n  \"temperature\": \"" + temp + "\"\n}")
           c.publish(TOPIC, "{\n  \"temperature\": \"" + str(temp) + "\"\n}")
+          led.value(0)
+          time.sleep(0.05)
+          led.value(1)
+
 
       time.sleep(1)
     

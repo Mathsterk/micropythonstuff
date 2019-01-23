@@ -78,7 +78,6 @@ while True:
         temp = round(ds.read_temp(rom), 1)
         if(temp != prevTemp and temp != 85.0):
           prevTemp = temp
-
           print(temp)    #display 
           led.value(state)
           status = not status
@@ -93,8 +92,12 @@ while True:
         
       time.sleep(0.5)
     
-
     
+#  except KeyboardInterrupt:
+#    if(c is not None):
+#      c.disconnect()
+#    wlan.disconnect()
+#    wlan.active(False)
   except:
     pass
   finally:

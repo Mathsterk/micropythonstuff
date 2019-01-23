@@ -86,18 +86,17 @@ while True:
           led.value(1)
           time.sleep(0.05)
           led.value(0)
-        else {
+        else:
           time.sleep(1)
-        }
         
       time.sleep(0.5)
     
     
-#  except KeyboardInterrupt:
-#    if(c is not None):
-#      c.disconnect()
-#    wlan.disconnect()
-#    wlan.active(False)
+  except KeyboardInterrupt:
+    if(c is not None):
+      c.disconnect()
+    wlan.disconnect()
+    wlan.active(False)
   except:
     pass
   finally:

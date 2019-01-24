@@ -54,7 +54,10 @@ def connectWifi(ssid,passwd):
   wlan.disconnect()                         #Disconnect the last connected WiFi
   wlan.connect(ssid,passwd)                 #connect wifi
   while(wlan.ifconfig()[0]=='0.0.0.0'):
-    time.sleep(1)
+    led.value(0)
+    time.sleep(0.25)
+    led.value(1)
+    print("Connecting...")
 
     
 #Catch exceptions,stop program if interrupted accidentally in the 'try'
@@ -79,27 +82,29 @@ while True:
         if(temp != prevTemp and temp != 85.0):
           prevTemp = temp
           print(temp)    #display 
-          led.value(state)
-          status = not status
           #c.publish(TOPIC, "{\n  \"temperature\": \"" + temp + "\"\n}")
           c.publish(TOPIC, "{\n  \"temperature\": \"" + str(temp) + "\"\n}")
           led.value(1)
-          time.sleep(0.05)
+          time.sleep(0.01)
           led.value(0)
         else:
-          time.sleep(1)
-        
-      time.sleep(0.5)
-    
-    
+          time.sleep(9)
+      time.sleep(1)
+
+
+
+
   except KeyboardInterrupt:
+    raise
     if(c is not None):
       c.disconnect()
     wlan.disconnect()
     wlan.active(False)
   except:
+    print("HIRR")
     pass
   finally:
+    print("FINAL")
     if(c is not None):
       c.disconnect()
     wlan.disconnect()
